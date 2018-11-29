@@ -28,24 +28,52 @@ namespace EntityDemo_pv03_SKe
 
         private void BtnDatanHaku_Click(object sender, RoutedEventArgs e)
         {
-            //aluksi tarvitaan entiteetti-objekti, joka luotiin EF-mallin luonnin yhteydessä
-            //kun ilmoitettiin, mihin tietokantaan halutaan olla yhteydessä
-            //Löytyy: Solution Expl - NorthwindModel - NorthwindModel.Context:n alta
-            //entiteetti-objekti sisältää tiedot db:n tauluista
+            //Alustetaan uusi instanssi mallioliosta, joka luotiin EF-mallin luonnin yhteydessä
+            //Malliolio hoitaa kaiken tietokantakäsittelyn taustalla
+            //Käytetään oletustietokantayhteyksiä, jotka määriteltiin, kun EF-malli luotiin
+                //(Löytyy: Solution Expl - NorthwindModel - NorthwindModel.Context:n alta
+                //entiteetti-objekti sisältää tiedot db:n tauluista)
 
             northwindEntities entities = new northwindEntities();
 
-                                 //from c  => c on Customer-taulun aliasointi
+
+            //LINQ-kysely        //from c  => c on Customer-taulun aliasointi
+            //tulosten haku tietokannasta ja tiedot tallennetaan muuttujaan finnishCustomers
+            //var-tietotyyppi: kääntäjä "kehittää" sopivan tietotyypin tulosten perusteella, koodaajan ei tarvitse tietää tietotyyppiä
             var finnishCustomers = from c in entities.Customers
                                    where c.Country == "Finland"
                                    select c;
 
-                      // cust = "tulostus"muuttujan nimi
+            //tulosten tulostaminen   // cust = "tulostus"muuttujan nimi
             foreach (var cust in finnishCustomers)
             {
                 MessageBox.Show($"Asiakas: {cust.CompanyName} \r\n" +
                     $"Yhteyshenkilö: {cust.ContactName}");
             }
+        }
+
+        private void BtnLINQ_Click(object sender, RoutedEventArgs e)
+        {
+            int[] numerot = { 5, 13, 6, 9, 10, 4, 12, 15, 3, 8, 11, 2, 1 };
+
+            //suurempi kuin 5, tulokset lajiteltu
+            //SQL: SELECT luku FROM numerot WHERE luku > 5 ORDER BY luku
+
+            var suuretNumerot = from n in numerot
+                                where n > 5
+                                orderby n
+                                select n;
+
+            foreach (var num in suuretNumerot)
+            {
+                MessageBox.Show(num.ToString());
+            }
+
+            //LINQ soveltuu tiedon hakuun:
+            //omat oliot
+            //XML - tiedostot
+            //DataSet - tietovarastot
+            //SQL - tietokannat
         }
     }
 }

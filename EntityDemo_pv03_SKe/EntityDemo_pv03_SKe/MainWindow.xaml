@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="BtnDatanHaku" Content="Button" HorizontalAlignment="Left" Height="78" Margin="180,89,0,0" VerticalAlignment="Top" Width="342" Click="BtnDatanHaku_Click"/>
+        <Button x:Name="BtnDatanHaku" Content="Entity Framework kysely" HorizontalAlignment="Left" Height="78" Margin="180,89,0,0" VerticalAlignment="Top" Width="342" Click="BtnDatanHaku_Click" FontSize="22"/>
+        <Button x:Name="BtnLINQ" Content="LINQ kysely" HorizontalAlignment="Left" Height="92" Margin="145,219,0,0" VerticalAlignment="Top" Width="203" FontSize="22" Click="BtnLINQ_Click"/>
 
     </Grid>
 </Window>
